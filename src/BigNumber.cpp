@@ -483,7 +483,7 @@ BigNumber BigNumber::operator >> (int x)const{
         res.num = new int8[1]();
         res.signal = signal;
         return res;
-    }
+    }   
 
     res.length = length - x;
     res.num = new int8[ceil(res.length, 8)]();
@@ -499,7 +499,7 @@ BigNumber BigNumber::operator >> (int x)const{
         */
        for(int i = 0; i < top; i++){
            res.num[i] |= num[i + p] >> r;
-           res.num[i] |= (num[i + p + 1] & ((int8)255 >> (8 - r)) << (8 - r));
+           res.num[i] |= (num[i + p + 1] & ((int8)255 >> (8 - r))) << (8 - r);
        }
     }
     return res;
