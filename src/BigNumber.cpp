@@ -218,15 +218,15 @@ void BigNumber::unsignedAdd(const BigNumber &a, const BigNumber &b, BigNumber &r
             res.num[blk] = (int8)val;
         }
     }
+    for(int i = res.length - 1; i >= 0; i--){
+        if((res.num[blk] >> bit) & 1) break;
+        res.length--;
+    }
     if(!res.length){
         if(res.num != NULL) delete res.num;
         res.num = new int8[1]();
         res.length = 1;
         return ;
-    }
-    for(int i = res.length - 1; i >= 0; i--){
-        if((res.num[blk] >> bit) & 1) break;
-        res.length--;
     }
 }
 
@@ -253,15 +253,14 @@ void BigNumber::unsignedSub(const BigNumber &a, const BigNumber &b, BigNumber &r
             res.num[blk] = (int8)val;
         }
     }
-
+    for(int i = res.length - 1; i >= 0; i--){
+        if((res.num[blk] >> bit) & 1) break;
+        res.length--;
+    }
     if(!res.length){
         if(res.num != NULL) delete res.num;
         res.num = new int8[1]();
         res.length = 1;
-    }
-    for(int i = res.length - 1; i >= 0; i--){
-        if((res.num[blk] >> bit) & 1) break;
-        res.length--;
     }
 }
 
@@ -330,7 +329,7 @@ void BigNumber::operator *= (const BigNumber &b){
 }
 
 BigNumber BigNumber::operator / (const BigNumber &b)const{
-    if(b == BigNumber(0)){
+    if(b.equal(BigNumber(0))){
         PRINT_FONT_RED;
         puts("Divide by 0!");
         PRINT_ATTR_REC;
@@ -440,7 +439,6 @@ BigNumber BigNumber::operator | (const BigNumber &b)const{
 void BigNumber::operator |= (const BigNumber &b){
     *this = *this | b;
 }
-
 
 BigNumber BigNumber::operator ^ (const BigNumber &b)const{
     BigNumber res;
