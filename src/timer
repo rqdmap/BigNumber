@@ -1,7 +1,0 @@
-#!/bin/bash
-make
-./data "$1" > in
-echo "RQD-BigNumber"
-time ./main < in 
-echo "Python3-BigNumber"
-time python3 main.py < in > /dev/null
